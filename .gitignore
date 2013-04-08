@@ -1,0 +1,4 @@
+.build/
+Text-Detect-CPlusPlus11-*.tar.gz
+Text-Detect-CPlusPlus11-*/
+*.BAK
