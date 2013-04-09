@@ -18,12 +18,10 @@ sub new
 #     uniform initialization
 #     auto
 #     trailing return type
-#     range-based for loop
 #     lambda
-#     member initialization
+#     in-place member initialization
 #     override
 #     final
-#     nullptr
 #     enum class
 #     alias template
 #     explicit conversion operator
@@ -32,15 +30,17 @@ sub new
 #     raw string literal
 #     user-defined literal
 #     thread-local
-#     = default / = delete
-#     static_assert
 #     alignment
-#     noexcept
 my %match = (
 	constexpr => qr/\bconstexpr\b/,
 	decltype => qr/\bdecltype\b/,
+	static_assert => qr/\bstatic_assert\b/,
+	nullptr => qr/\bnullptr\b/,
+	noexcept => qr/\bnoexcept\b/,
 	extern_template => qr/extern\s+template/,
 	initialize_list => qr/#include\s*<initializer_list>/,
+	default_delete => qr/\b=\s*(?:default|delete)\b/,
+	range_based_for => qr/for\s*\([^;]*\)/,
 );
 
 sub detect
