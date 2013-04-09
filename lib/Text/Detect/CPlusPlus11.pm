@@ -58,7 +58,8 @@ sub detect
 		}
 		close $fh;
 	}
-# TODO: strip comments
+	$content =~ s,//.*?\n, ,g;
+	$content =~ s,/\*.*?\*/, ,g;
 	my @result;
 	foreach my $key (keys %match) {
 		if($content =~ /$match{$key}/) {
