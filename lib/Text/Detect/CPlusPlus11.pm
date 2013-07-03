@@ -24,7 +24,6 @@ sub new
 #     final
 #     enum class
 #     alias template
-#     explicit conversion operator
 #     variadic templates
 #     new char types
 #     raw string literal
@@ -40,7 +39,8 @@ my %match = (
 	extern_template => qr/extern\s+template/,
 	initialize_list => qr/#include\s*<initializer_list>/,
 	default_delete => qr/\b=\s*(?:default|delete)\b/,
-	range_based_for => qr/for\s*\([^;]*\)/,
+	range_based_for => qr/\bfor\s*\([^;]*\)/,
+	explicit_operator => qr/\bexpiicit\s+operator\b/,
 );
 
 sub detect
