@@ -1,24 +1,27 @@
-use Test::More tests => 6;
+use Test::More;
 
-use_ok('Text::Detect::CPlusPlus11');
-my $obj = Text::Detect::CPlusPlus11->new;
-is_deeply([sort $obj->detect(\<<EOF)], [sort qw(constexpr)], 'constexpr variable');
+my @tests = (
+	[\<<EOF, [qw(constexpr)], 'constexpr variable'],
 constexpr int n = 1;
 EOF
-
-is_deeply([sort $obj->detect(\<<EOF)], [sort qw()], '! constexpr variable');
+	[\<<EOF, [], '! constexpr variable'],
 const int n = 1;
 EOF
-
-is_deeply([sort $obj->detect(\<<EOF)], [sort qw()], '! constexpr variable');
+	[\<<EOF, [], '! constexpr variable'],
 int constexpr_n = 1;
 EOF
-
-is_deeply([sort $obj->detect(\<<EOF)], [sort qw(constexpr)], 'constexpr function');
+	[\<<EOF, [qw(constexpr)], 'constexpr function'],
 constexpr int func { return 5; }
 EOF
-
-is_deeply([sort $obj->detect(\<<EOF)], [sort qw()], '! constexpr function');
+	[\<<EOF, [], '! constexpr function'],
 cont int func { return 5; }
 EOF
+);
 
+plan tests => @tests + 1;
+use_ok('Text::Detect::CPlusPlus11');
+my $obj = Text::Detect::CPlusPlus11->new;
+
+foreach my $test (@tests) {
+	is_deeply([sort $obj->detect($test->[0])], [sort @{$test->[1]}], $test->[2]);
+}
