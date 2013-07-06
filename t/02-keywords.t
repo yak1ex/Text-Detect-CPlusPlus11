@@ -16,6 +16,12 @@ EOF
 	[\<<EOF, [], '! constexpr function'],
 cont int func { return 5; }
 EOF
+	[\<<EOF, [qw(static_assert)], 'static_assert'],
+static_assert(sizeof(long) >= 8, "64-bit code generation required for this library.");
+EOF
+	[\<<EOF, [], '! static_assert'],
+int static_asserts = 0;
+EOF
 );
 
 plan tests => @tests + 1;
