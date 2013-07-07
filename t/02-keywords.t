@@ -22,6 +22,14 @@ EOF
 	[\<<EOF, [], '! static_assert'],
 int static_asserts = 0;
 EOF
+	[\<<EOF, [qw(decltype)], 'decltype'],
+struct A { double x; };
+decltype(a->x) x3;
+decltype((a->x)) x4 = x3;
+EOF
+	[\<<EOF, [qw(nullptr)], 'nullptr'],
+char* p = std::nullptr;
+EOF
 );
 
 plan tests => @tests + 1;
