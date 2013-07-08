@@ -30,6 +30,16 @@ EOF
 	[\<<EOF, [qw(nullptr)], 'nullptr'],
 char* p = std::nullptr;
 EOF
+	[\<<EOF, [qw(constexpr noexcept)], 'noexcept without args'],
+static constexpr T min() noexcept { return T(); }
+EOF
+	[\<<EOF, [qw(noexcept)], 'noexcept with args 1'],
+template<class T> void swap(T& a, T& b) noexcept(is_nothrow_move_constructible<T>::value &&
+is_nothrow_move_assignable<T>::value);
+EOF
+	[\<<EOF, [qw(noexcept)], 'noexcept with args 2'],
+template <class T, size_t N> void swap(T (&a)[N], T (&b)[N]) noexcept(noexcept(swap(*a, *b)));
+EOF
 );
 
 plan tests => @tests + 1;
