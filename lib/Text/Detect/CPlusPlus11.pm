@@ -36,11 +36,11 @@ my %match = (
 	static_assert => qr/\bstatic_assert\b/,
 	nullptr => qr/\bnullptr\b/,
 	noexcept => qr/\bnoexcept\b/,
-	extern_template => qr/extern\s+template/,
-	initialize_list => qr/#include\s*<initializer_list>/,
-	default_delete => qr/\b=\s*(?:default|delete)\b/,
+	extern_template => qr/\bextern\s+template\b/,
+	initializer_list => qr/#include\s*<initializer_list>/,
+	default_delete => qr/=\s*(?:default|delete)\b/,
 	range_based_for => qr/\bfor\s*\([^;]*\)/,
-	explicit_operator => qr/\bexpiicit\s+operator\b/,
+	explicit_operator => qr/\bexplicit\s+operator\b/,
 );
 
 sub detect
