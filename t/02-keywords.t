@@ -40,6 +40,21 @@ EOF
 	[\<<EOF, [qw(noexcept)], 'noexcept with args 2'],
 template <class T, size_t N> void swap(T (&a)[N], T (&b)[N]) noexcept(noexcept(swap(*a, *b)));
 EOF
+	[\<<EOF, [qw(extern_template)], 'extern template'],
+extern template vector<int>;
+EOF
+	[\<<EOF, [qw(initializer_list)], 'initializer list'],
+#include <initializer_list>
+EOF
+	[\<<EOF, [qw(default_delete)], 'default / delete'],
+struct A { A() = default; A(const A&) = delete; };
+EOF
+	[\<<EOF, [qw(range_based_for)], 'range-based for'],
+for(auto v : c) { std::cout << v << std::endl; }
+EOF
+	[\<<EOF, [qw(explicit_operator)], 'explicit conversion operator'],
+struct A { explicit operator int(); };
+EOF
 );
 
 plan tests => @tests + 1;
